@@ -48,7 +48,7 @@ public class QuanLyNhanVienFrame extends javax.swing.JFrame {
 
     private void loadTable(DanhSachNhanVien ds) throws ParseException{
         this.tableModel = (DefaultTableModel) jTable1.getModel();
-        Object rowData[] = new Object[8];
+        Object rowData[] = new Object[9];
         if(tableModel.getRowCount() < ds.danhSach.size()){
             for (int i = 0; i < ds.danhSach.size(); i++) {
                 NhanVien nv = ds.danhSach.get(i);
@@ -60,6 +60,7 @@ public class QuanLyNhanVienFrame extends javax.swing.JFrame {
                 String chucVu = null;
                 double phuCapChucVu = 0;
                 int soSanPhamBan = 0;
+                double luongThucNhan = 0;
                 if(nv instanceof NVBanHang){
                     NVBanHang nvbh = (NVBanHang) nv;
 
@@ -70,6 +71,7 @@ public class QuanLyNhanVienFrame extends javax.swing.JFrame {
     //                chucVu = null;
     //                phuCapChucVu = 0;
                     soSanPhamBan = nvbh.getSoSanPhamBan();
+                    luongThucNhan = nvbh.tinhLuongThucNhan();
                 }
                 if(nv instanceof NVQuanLy){
                     NVQuanLy nvql = (NVQuanLy) nv;
@@ -81,6 +83,7 @@ public class QuanLyNhanVienFrame extends javax.swing.JFrame {
                     chucVu = nvql.getChucVu();
                     phuCapChucVu = nvql.getPhuCapChucVu();
     //                soSanPhamBan = 0;
+                    luongThucNhan = nvql.tinhLuongThucNhan();
                 }
                 rowData[0] = stt+1;
                 rowData[1] = maNhanVien;
@@ -90,13 +93,14 @@ public class QuanLyNhanVienFrame extends javax.swing.JFrame {
                 rowData[5] = chucVu;
                 rowData[6] = phuCapChucVu;
                 rowData[7] = soSanPhamBan;
+                rowData[8] = luongThucNhan;
                 tableModel.addRow(rowData);
             }
         }
     }
     
     private Object[] loadColumnName(){
-        return new Object[]{"STT","Mã Nhân Viên","Tên Nhân Viên","Ngày Vào Làm","Hệ Số Lương","Chức Vụ","Phụ Cấp Chức Vụ","Số Sản Phẩm Bán"};
+        return new Object[]{"STT","Mã Nhân Viên","Tên Nhân Viên","Ngày Vào Làm","Hệ Số Lương","Chức Vụ","Phụ Cấp Chức Vụ","Số Sản Phẩm Bán","Lương Thực Nhận"};
     }
 
 //    {1,"q1","NamNH",new SimpleDateFormat(dateFormat).parse("06/10/2009"),3.5,"CTO",50000},
@@ -179,7 +183,7 @@ public class QuanLyNhanVienFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Mã Nhân Viên", "Tên Nhân Viên", "Ngày Vào Làm", "Hệ Số Lương", "Chức Vụ", "Phụ Cấp Chức Vụ", "Số Sản Phẩm Bán"
+                "STT", "Mã Nhân Viên", "Tên Nhân Viên", "Ngày Vào Làm", "Hệ Số Lương", "Chức Vụ", "Phụ Cấp Chức Vụ", "Số Sản Phẩm Bán", "Lương Thực Nhận"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
